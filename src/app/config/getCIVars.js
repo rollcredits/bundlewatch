@@ -30,7 +30,7 @@ const getCIVars = (env) => {
 
     const githubAccessToken =
         env.BUNDLEWATCH_GITHUB_TOKEN || env.GITHUB_ACCESS_TOKEN
-
+    const tinyURLApiKey = env.TINY_URL_API_KEY
     return {
         repoOwner,
         repoName,
@@ -38,6 +38,7 @@ const getCIVars = (env) => {
         repoBranchBase,
         githubAccessToken,
         commitSha,
+        tinyURLApiKey,
     }
 }
 

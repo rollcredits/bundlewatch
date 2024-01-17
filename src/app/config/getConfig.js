@@ -8,6 +8,7 @@ const ciVars = getCIVars(process.env)
 const defaultConfig = {
     normalizeFilenames: null,
     maxTimeout: null,
+    tinyURLAPIKey: ciVars.tinyURLApiKey,
     files: [],
     bundlewatchServiceHost: 'https://service.bundlewatch.io', // Can be a custom service, or set to NUll
     ci: {
