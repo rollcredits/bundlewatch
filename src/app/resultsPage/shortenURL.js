@@ -1,6 +1,7 @@
 import logger from '../../logger'
 
 const shortenURL = (url, tinyURLAPIKey) => {
+    // return url
     return fetch('https://api.tinyurl.com/create', {
         method: 'POST',
         headers: {

@@ -49,6 +49,10 @@ class GitHubService {
     }
 
     update(message, url, status, filePath) {
+        if (this.hasReported) {
+            return Promise.resolve()
+        }
+        this.hasReported = true
         if (!this.enabled) {
             return Promise.resolve({})
         }
@@ -95,17 +99,14 @@ class GitHubService {
     }
 
     pass({ message, url }) {
-        this.hasReported = true
         return this.update(message, url, 'success')
     }
 
     fail({ message, url, filePath }) {
-        this.hasReported = true
         return this.update(message, url, 'failure', filePath)
     }
 
     error({ message }) {
-        this.hasReported = true
         return this.update(message, undefined, 'error')
     }
 }

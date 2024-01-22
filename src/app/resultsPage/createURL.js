@@ -57,7 +57,7 @@ const createURL = async ({
         urlPromises.push(shortenURL(longURL, tinyURLAPIKey))
     }
     const shortenedURLS = await Promise.all(urlPromises)
-    logger.debug(`Result URLS: ${shortenedURLS.join('\n')}`)
+    logger.info(`\nResult URLS: ${shortenedURLS.join('\n')}\n`)
     return shortenedURLS[0]
 }
 

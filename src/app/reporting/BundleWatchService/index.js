@@ -37,14 +37,14 @@ class bundlewatchService {
         return false
     }
 
-    getFileDetailsForBaseBranch() {
+    async getFileDetailsForBaseBranch(retries = 0) {
         if (!this.enabled || !this.repoBranchBase) {
             return Promise.resolve({})
         }
 
         logger.info(`Retrieving comparison`)
 
-        return axios
+        const result = await axios
             .post(
                 `${this.bundlewatchServiceStoreUrl}/lookup`,
                 {
@@ -70,8 +70,15 @@ class bundlewatchService {
                         error.code || error.message
                     }`,
                 )
-                return {}
+                return null
             })
+        if (result === null && retries <= 2) {
+            await new Promise((resolve) => {
+                setTimeout(resolve, 1000 * (retries + 1))
+            })
+            return this.getFileDetailsForBaseBranch(retries + 1)
+        }
+        return result ?? {}
     }
 
     saveFileDetailsForCurrentBranch({ fileDetailsByPath, trackBranches }) {

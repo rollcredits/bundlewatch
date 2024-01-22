@@ -96,13 +96,17 @@ const mainSafe = async () => {
     }
     process.on('unhandledRejection', async () => {
         await githubService.error({
-            message: 'Uncaught exception when running bundlewatch',
+            message: 'Unhandled rejection when running bundlewatch',
         })
+        logger.fatal('Unhandled rejection when running bundlewatch')
+        process.exit(1)
     })
     process.on('uncaughtException', async () => {
         await githubService.error({
             message: 'Uncaught exception when running bundlewatch',
         })
+        logger.fatal('Uncaught exception when running bundlewatch')
+        process.exit(1)
     })
     try {
         const errorCode = await Promise.race([

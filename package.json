@@ -1,6 +1,6 @@
 {
     "name": "bundlewatch-rollcredits",
-    "version": "0.0.32",
+    "version": "0.0.35",
     "description": "Keep watch of your bundle size",
     "repository": {
         "type": "git",
